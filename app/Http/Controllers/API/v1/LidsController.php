@@ -67,9 +67,13 @@ class LidsController extends Controller
     $n_lid->name = $insertItem['umcfields']['name'];
     $n_lid->email = $insertItem['umcfields']['email'];
     $n_lid->afilyator = $insertItem['umcfields']['affiliate_user'];
+
     $n_lid->provider_id = $f_key->id;
-    $n_lid->user_id = $insertItem['user_id'];
-    $n_lid->office_id = User::where('id', (int) $insertItem['user_id'])->value('office_id');
+    $provider = Provider::where('id', $f_key->id)->first();
+    $n_lid->user_id = $provider->user_id;
+    $n_lid->office_id = User::where('id', $provider->user_id)->value('office_id');
+    // $n_lid->user_id = $insertItem['user_id'];
+    // $n_lid->office_id = User::where('id', (int) $insertItem['user_id'])->value('office_id');
     $n_lid->created_at = Now();
     $n_lid->updated_at = Now();
     $n_lid->active = 1;
