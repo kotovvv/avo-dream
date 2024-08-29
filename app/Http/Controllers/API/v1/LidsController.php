@@ -651,7 +651,7 @@ FROM
     INNER JOIN `lids` l
         ON (d.`lid_id` = l.`id`)
 WHERE (l.`provider_id` = '" . $f_key->id . "'
-    AND date(d.`created_at`) BETWEEN " . $datefrom . " AND  " . $dateto . ")";
+    AND date(d.`created_at`) BETWEEN '" . $datefrom . "' AND  '" . $dateto . "')";
 
     $leads =  DB::select(DB::raw($sql));
     $response = [];
